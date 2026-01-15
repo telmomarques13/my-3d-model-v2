@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meu Modelo 3D Interativo</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+        body { margin: 0; background: #000; }
+        model-viewer {
+            width: 100vw;
+            height: 100vh;
+            --progress-bar-color: #ff3366;
+        }
+    </style>
+</head>
+<body>
+    <model-viewer 
+        src="modelo.glb" 
+        alt="Meu Objeto 3D"
+        ar
+        ar-modes="webxr scene-viewer quick-look"
+        camera-controls
+        auto-rotate
+        shadow-intensity="2"
+        exposure="1.2"
+        environment-image="neutral">
+        
+        <button slot="ar-button" style="
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff3366;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;">
+            👁️ Ver em RA no telemóvel
+        </button>
+    </model-viewer>
+</body>
+</html>
