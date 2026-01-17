@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>DarkForm 3D Gallery</title>
-<meta name="description" content="Galeria minimalista de modelos 3D em formato GLB">
+<meta name="description" content="Galeria minimalista de modelos 3D">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
@@ -38,7 +38,7 @@ header {
 
 model-viewer {
     width: 100%;
-    height: 260px;
+    height: 300px;
     background: white;
     border-radius: 8px;
 }
@@ -72,47 +72,28 @@ a.download:hover {
 <main class="gallery">
 
 <div class="card">
-    <model-viewer 
-        src="models/modelo1.glb"
-        camera-controls
-        auto-rotate
-        shadow-intensity="1"
-        exposure="1"
-        environment-image="neutral"
-        ar
-        disable-zoom="false"
-        interaction-prompt="none"
-        camera-orbit="0deg 75deg 2.5m"
-        style="--poster-color: #fff;"
-        >
-    </model-viewer>
 
-    <div class="info">
-        <span>Modelo 01</span>
-        <a class="download" href="models/modelo1.glb" download>Download</a>
-    </div>
+<model-viewer
+    src="models/cadeira_4.compressed.glb"
+    camera-controls
+    shadow-intensity="1"
+    exposure="1"
+    environment-image="neutral"
+    interaction-prompt="none"
+    style="background-color: white;"
+>
+</model-viewer>
+
+<div class="info">
+    <span>Cadeira 4</span>
+    <a class="download" href="models/cadeira_4.compressed.glb" download>Download</a>
 </div>
 
-<div class="card">
-    <model-viewer src="models/modelo2.glb" camera-controls shadow-intensity="1"></model-viewer>
-    <div class="info">
-        <span>Modelo 02</span>
-        <a class="download" href="models/modelo2.glb" download>Download</a>
-    </div>
-</div>
-
-<div class="card">
-    <model-viewer src="models/modelo3.glb" camera-controls shadow-intensity="1"></model-viewer>
-    <div class="info">
-        <span>Modelo 03</span>
-        <a class="download" href="models/modelo3.glb" download>Download</a>
-    </div>
 </div>
 
 </main>
 
 <script>
-// tentativa simples de dificultar download direto por clique direito
 document.addEventListener("contextmenu", e => e.preventDefault());
 </script>
 
