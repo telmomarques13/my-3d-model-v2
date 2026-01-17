@@ -2,76 +2,26 @@
 <html lang="pt-PT">
 <head>
 <meta charset="UTF-8">
-<title>DarkForm 3D Gallery</title>
-<meta name="description" content="Galeria minimalista de modelos 3D">
+<title>Visualizador 3D</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <style>
-body {
+html, body {
     margin: 0;
-    font-family: system-ui, sans-serif;
+    height: 100%;
     background: #0f0f0f;
-    color: #eaeaea;
-}
-
-header {
-    padding: 30px;
-    text-align: center;
-    font-size: 24px;
-    letter-spacing: 2px;
-}
-
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
-    padding: 25px;
-}
-
-.card {
-    background: #181818;
-    border-radius: 12px;
-    padding: 10px;
 }
 
 model-viewer {
     width: 100%;
-    height: 300px;
+    height: 100%;
     background: white;
-    border-radius: 8px;
-}
-
-.info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-a.download {
-    color: #aaa;
-    text-decoration: none;
-    border: 1px solid #333;
-    padding: 4px 10px;
-    border-radius: 6px;
-}
-
-a.download:hover {
-    color: white;
-    border-color: #666;
 }
 </style>
 </head>
 <body>
-
-<header>DARKFORM — 3D FILES</header>
-
-<main class="gallery">
-
-<div class="card">
 
 <model-viewer
     src="models/cadeira_4.compressed.glb"
@@ -80,22 +30,8 @@ a.download:hover {
     exposure="1"
     environment-image="neutral"
     interaction-prompt="none"
-    style="background-color: white;"
 >
 </model-viewer>
-
-<div class="info">
-    <span>Cadeira 4</span>
-    <a class="download" href="models/cadeira_4.compressed.glb" download>Download</a>
-</div>
-
-</div>
-
-</main>
-
-<script>
-document.addEventListener("contextmenu", e => e.preventDefault());
-</script>
 
 </body>
 </html>
