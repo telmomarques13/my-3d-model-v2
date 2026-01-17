@@ -1,43 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-PT">
 <head>
-    <title>Meu Modelo 3D Interativo</title>
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-    <style>
-        body { margin: 0; background: #000; }
-        model-viewer {
-            width: 100vw;
-            height: 100vh;
-            --progress-bar-color: #ff3366;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>DarkForm 3D Gallery</title>
+<meta name="description" content="Galeria minimalista de modelos 3D em formato GLB">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+<style>
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background: #0f0f0f;
+    color: #eaeaea;
+}
+
+header {
+    padding: 30px;
+    text-align: center;
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    padding: 25px;
+}
+
+.card {
+    background: #181818;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+model-viewer {
+    width: 100%;
+    height: 260px;
+    background: white;
+    border-radius: 8px;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+a.download {
+    color: #aaa;
+    text-decoration: none;
+    border: 1px solid #333;
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+a.download:hover {
+    color: white;
+    border-color: #666;
+}
+</style>
 </head>
 <body>
+
+<header>DARKFORM — 3D FILES</header>
+
+<main class="gallery">
+
+<div class="card">
     <model-viewer 
-        src="modelo.glb" 
-        alt="Meu Objeto 3D"
-        ar
-        ar-modes="webxr scene-viewer quick-look"
+        src="models/modelo1.glb"
         camera-controls
         auto-rotate
-        shadow-intensity="2"
-        exposure="1.2"
-        environment-image="neutral">
-        
-        <button slot="ar-button" style="
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #ff3366;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 16px;
-            cursor: pointer;">
-            👁️ Ver em RA no telemóvel
-        </button>
+        shadow-intensity="1"
+        exposure="1"
+        environment-image="neutral"
+        ar
+        disable-zoom="false"
+        interaction-prompt="none"
+        camera-orbit="0deg 75deg 2.5m"
+        style="--poster-color: #fff;"
+        >
     </model-viewer>
+
+    <div class="info">
+        <span>Modelo 01</span>
+        <a class="download" href="models/modelo1.glb" download>Download</a>
+    </div>
+</div>
+
+<div class="card">
+    <model-viewer src="models/modelo2.glb" camera-controls shadow-intensity="1"></model-viewer>
+    <div class="info">
+        <span>Modelo 02</span>
+        <a class="download" href="models/modelo2.glb" download>Download</a>
+    </div>
+</div>
+
+<div class="card">
+    <model-viewer src="models/modelo3.glb" camera-controls shadow-intensity="1"></model-viewer>
+    <div class="info">
+        <span>Modelo 03</span>
+        <a class="download" href="models/modelo3.glb" download>Download</a>
+    </div>
+</div>
+
+</main>
+
+<script>
+// tentativa simples de dificultar download direto por clique direito
+document.addEventListener("contextmenu", e => e.preventDefault());
+</script>
+
 </body>
 </html>
