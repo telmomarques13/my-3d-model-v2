@@ -29,62 +29,233 @@ body{
     color:var(--text);
 }
 
-/* ===== HEADER UPGRADE ===== */
-
-.site-header{
+header{
     position:sticky;
     top:0;
-    z-index:50;
+    background:rgba(10,10,10,.7);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border);
+    padding:18px 60px;
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    padding:22px 70px;
-    background:rgba(10,10,10,0.65);
-    backdrop-filter:blur(14px);
-    border-bottom:1px solid rgba(255,255,255,0.06);
-}
-
-.logo{
-    display:flex;
     align-items:center;
-    gap:12px;
-    font-weight:600;
+    z-index:20;
 }
 
-.logo-mark{
-    width:28px;
-    height:28px;
-    border:1px solid #444;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:12px;
-    letter-spacing:1px;
-}
+.logo{font-weight:700;letter-spacing:3px;font-size:14px}
 
-.logo-text{
-    font-size:14px;
-    letter-spacing:2px;
-}
-
-.nav a{
-    position:relative;
-    margin-left:28px;
-    font-size:13px;
+nav a{
     color:#aaa;
+    margin-left:28px;
     text-decoration:none;
-    transition:0.25s;
+    font-size:13px;
 }
 
-.nav a::after{
+nav a:hover{color:white}
+
+main{max-width:1200px;margin:auto;padding:80px 40px}
+
+section{margin-bottom:120px}
+
+/* HERO */
+
+.hero{
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:60px;
+    align-items:center;
+}
+
+.hero h1{font-size:44px;line-height:1.1}
+.hero p{color:var(--muted);max-width:480px;line-height:1.7}
+
+/* VIEWER */
+
+.viewer-card{
+    background:linear-gradient(180deg,#1a1a1a,#111);
+    border-radius:22px;
+    padding:18px;
+    position:relative;
+    box-shadow:0 0 0 1px var(--border);
+}
+
+.viewer-card::before{
     content:"";
     position:absolute;
-    left:0;
-    bottom:-6px;
-    width:0%;
-    height:1px;
-    background:white;
-    transition:0.3s ease;
+    inset:-1px;
+    border-radius:22px;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.2),transparent);
+    filter:blur(14px);
+    opacity:.6;
+    pointer-events:none;
 }
 
-.nav a:hover{color:whit
+.viewer-title{
+    font-size:12px;
+    letter-spacing:2px;
+    color:#888;
+    margin-bottom:10px;
+}
+
+model-viewer{
+    width:100%;
+    height:420px;
+    background:linear-gradient(#f4f4f4,#eaeaea);
+    border-radius:14px;
+}
+
+.model-info{
+    display:flex;
+    justify-content:space-between;
+    margin-top:12px;
+    font-size:13px;
+    color:#aaa;
+}
+
+/* PORTFOLIO */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:24px;
+}
+
+.card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:24px;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    border-color:#444;
+}
+
+.card h3{margin-top:0}
+
+/* SERVICES */
+
+.services{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:24px;
+}
+
+/* CONTACT */
+
+.contact-box{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:40px;
+    text-align:center;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:40px;
+    color:#666;
+    font-size:12px;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+    .hero{grid-template-columns:1fr}
+    header{padding:16px 24px}
+    main{padding:50px 24px}
+    .hero h1{font-size:32px}
+    model-viewer{height:320px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">DARKFORM</div>
+<nav>
+<a href="#inicio">Início</a>
+<a href="#portfolio">Portfólio</a>
+<a href="#servicos">Serviços</a>
+<a href="#sobre">Sobre</a>
+<a href="#contacto">Contacto</a>
+</nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+
+<div>
+<h1>Modelos 3D<br>para apresentação profissional</h1>
+<p>Criação e visualização de modelos 3D realistas para produtos, arquitetura e design industrial, com foco em qualidade visual e experiência do utilizador.</p>
+</div>
+
+<div class="viewer-card">
+<div class="viewer-title">VISUALIZADOR 3D</div>
+
+<model-viewer
+src="models/cadeira.glb"
+camera-controls
+shadow-intensity="1"
+exposure="1"
+environment-image="neutral"
+interaction-prompt="none">
+</model-viewer>
+
+<div class="model-info">
+<div><strong>Cadeira Minimal</strong></div>
+<div>GLB • Interativo</div>
+</div>
+</div>
+
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+<h2>Portfólio</h2>
+<div class="grid">
+<div class="card"><h3>Cadeira Minimal</h3><p>Modelo otimizado para visualização web.</p></div>
+<div class="card"><h3>Mesa Concept</h3><p>Design industrial.</p></div>
+<div class="card"><h3>Luminária</h3><p>Produto para e-commerce.</p></div>
+</div>
+</section>
+
+<!-- SERVICES -->
+<section id="servicos">
+<h2>Serviços</h2>
+<div class="services">
+<div class="card"><h3>Modelação 3D</h3><p>Modelos realistas e otimizados.</p></div>
+<div class="card"><h3>Visualização Web</h3><p>Integração interativa em websites.</p></div>
+<div class="card"><h3>Renderização</h3><p>Imagens para catálogos e marketing.</p></div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="sobre">
+<h2>Sobre</h2>
+<p>DarkForm Studio é um estúdio especializado em visualização 3D para produtos e experiências digitais modernas.</p>
+</section>
+
+<!-- CONTACT -->
+<section id="contacto">
+<div class="contact-box">
+<h2>Contacto</h2>
+<p>contacto@darkformstudio.com</p>
+<p>Portugal</p>
+</div>
+</section>
+
+</main>
+
+<footer>
+© 2026 DarkForm Studio
+</footer>
+
+</body>
+</html>
