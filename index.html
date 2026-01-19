@@ -1,261 +1,941 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt">
 <head>
-<meta charset="UTF-8">
-<title>DarkForm Studio</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio profissional de projetos 3D, modelação e animação digital">
+    <meta name="keywords" content="3D, modelação, animação, portfolio, design">
+    <meta name="author" content="Portfolio 3D">
+    <title>Portfolio 3D - Modelação e Animação</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+        .loader {
+            display: none;
+            border: 3px solid #333;
+            border-top: 3px solid #ff6b35;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
 
-<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+        .loader.active {
+            display: block;
+        }
 
-<style>
-:root {
-    --bg:#0b0b0b;
-    --panel:#151515;
-    --border:#242424;
-    --text:#ededed;
-    --muted:#9a9a9a;
-}
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-*{box-sizing:border-box}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
 
-body{
-    margin:0;
-    font-family:'Inter',system-ui,sans-serif;
-    background:radial-gradient(circle at top,#161616,#090909 70%);
-    color:var(--text);
-}
+        .loader {
+            display: none;
+            border: 3px solid #333;
+            border-top: 3px solid #ff6b35;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
 
-header{
-    position:sticky;
-    top:0;
-    background:rgba(10,10,10,.7);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--border);
-    padding:18px 60px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    z-index:20;
-}
+        .loader.active {
+            display: block;
+        }
 
-.logo{font-weight:700;letter-spacing:3px;font-size:14px}
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-nav a{
-    color:#aaa;
-    margin-left:28px;
-    text-decoration:none;
-    font-size:13px;
-}
+        header {
+            padding: 4rem 2rem;
+            text-align: center;
+            background: #0f0f0f;
+            border-bottom: 1px solid #1a1a1a;
+            position: relative;
+            overflow: hidden;
+        }
 
-nav a:hover{color:white}
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 107, 53, 0.1), transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
 
-main{max-width:1200px;margin:auto;padding:80px 40px}
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
 
-section{margin-bottom:120px}
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
 
-/* HERO */
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInDown 1s ease;
+        }
 
-.hero{
-    display:grid;
-    grid-template-columns:1fr 1.2fr;
-    gap:60px;
-    align-items:center;
-}
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.hero h1{font-size:44px;line-height:1.1}
-.hero p{color:var(--muted);max-width:480px;line-height:1.7}
+        .tagline {
+            color: #888;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 1.5s ease;
+        }
 
-/* VIEWER */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-.viewer-card{
-    background:linear-gradient(180deg,#1a1a1a,#111);
-    border-radius:22px;
-    padding:18px;
-    position:relative;
-    box-shadow:0 0 0 1px var(--border);
-}
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+            animation: fadeIn 2s ease;
+        }
 
-.viewer-card::before{
-    content:"";
-    position:absolute;
-    inset:-1px;
-    border-radius:22px;
-    background:linear-gradient(120deg,transparent,rgba(255,255,255,.2),transparent);
-    filter:blur(14px);
-    opacity:.6;
-    pointer-events:none;
-}
+        .social-links a {
+            color: #666;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
 
-.viewer-title{
-    font-size:12px;
-    letter-spacing:2px;
-    color:#888;
-    margin-bottom:10px;
-}
+        .social-links a:hover {
+            color: #ff6b35;
+            transform: translateY(-3px);
+        }
 
-model-viewer{
-    width:100%;
-    height:420px;
-    background:linear-gradient(#f4f4f4,#eaeaea);
-    border-radius:14px;
-}
+        .cta-header {
+            margin-top: 2rem;
+        }
 
-.model-info{
-    display:flex;
-    justify-content:space-between;
-    margin-top:12px;
-    font-size:13px;
-    color:#aaa;
-}
+        .cta-btn {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: #000;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
 
-/* PORTFOLIO */
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
+        }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:24px;
-}
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 1.5rem;
+            background: #0f0f0f;
+            backdrop-filter: blur(5px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #1a1a1a;
+        }
 
-.card{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:24px;
-    transition:.3s;
-}
+        nav button {
+            background: none;
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+            padding: 0.7rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
 
-.card:hover{
-    transform:translateY(-6px);
-    border-color:#444;
-}
+        nav button:hover, nav button.active {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: #000;
+            border-color: #f7931e;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
 
-.card h3{margin-top:0}
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
 
-/* SERVICES */
+        .section {
+            display: none;
+        }
 
-.services{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:24px;
-}
+        .section.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
 
-/* CONTACT */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.contact-box{
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:40px;
-    text-align:center;
-}
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-/* FOOTER */
+        .filter-btn {
+            background: #141414;
+            border: 1px solid #333;
+            color: #888;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
 
-footer{
-    text-align:center;
-    padding:40px;
-    color:#666;
-    font-size:12px;
-}
+        .filter-btn:hover, .filter-btn.active {
+            background: #ff6b35;
+            color: #000;
+            border-color: #ff6b35;
+        }
 
-/* MOBILE */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
 
-@media(max-width:900px){
-    .hero{grid-template-columns:1fr}
-    header{padding:16px 24px}
-    main{padding:50px 24px}
-    .hero h1{font-size:32px}
-    model-viewer{height:320px}
-}
-</style>
+        .cta-btn {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: #000;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.5);
+        }
+
+        .fullscreen-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            color: #ff6b35;
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(255, 107, 53, 0.9);
+            color: #000;
+        }
+
+        .fullscreen-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fullscreen-overlay.active {
+            display: flex;
+        }
+
+        .fullscreen-content {
+            width: 90%;
+            height: 90%;
+            position: relative;
+        }
+
+        .fullscreen-content model-viewer {
+            width: 100%;
+            height: 100%;
+        }
+
+        .close-fullscreen {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 107, 53, 0.9);
+            border: none;
+            color: #000;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            z-index: 2001;
+        }
+
+        .card {
+            background: #141414;
+            border-radius: 15px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid #1a1a1a;
+            transition: all 0.3s ease;
+            position: relative;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+            border-color: #ff6b35;
+        }
+
+        .card-thumbnail {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: #0a0a0a;
+            cursor: pointer;
+        }
+
+        .fullscreen-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            border: none;
+            color: #ff6b35;
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(255, 107, 53, 0.9);
+            color: #000;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #ff6b35;
+        }
+
+        .card-date {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .card-description {
+            color: #888;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: rgba(255, 107, 53, 0.1);
+            color: #ff6b35;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .card-specs {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 400px;
+            background: #0a0a0a;
+        }
+
+        video {
+            width: 100%;
+            background: #000;
+        }
+
+        .upload-section {
+            text-align: center;
+            padding: 3rem;
+            background: #141414;
+            border-radius: 15px;
+            border: 1px solid #1a1a1a;
+            margin-bottom: 2rem;
+        }
+
+        .upload-btn {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: #000;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        input[type="file"], .modal-input {
+            display: none;
+        }
+
+        .info-text {
+            color: #666;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #141414;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            border: 1px solid #333;
+            margin: 2rem auto;
+        }
+
+        .modal-content h3 {
+            color: #ff6b35;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #888;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .tag-input-container {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag-input-container input {
+            flex: 1;
+        }
+
+        .add-tag-btn {
+            background: #ff6b35;
+            color: #000;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .tags-display {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+        }
+
+        .btn-secondary {
+            background: #333;
+            color: #e0e0e0;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .about-section {
+            background: #141414;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid #1a1a1a;
+        }
+
+        .about-section h3 {
+            color: #ff6b35;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-item {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .skill-item i {
+            font-size: 2rem;
+            color: #ff6b35;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form {
+            background: #141414;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid #1a1a1a;
+            margin-top: 2rem;
+        }
+
+        .contact-form h3 {
+            color: #ff6b35;
+            margin-bottom: 1.5rem;
+        }
+
+        .fullscreen-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fullscreen-overlay.active {
+            display: flex;
+        }
+
+        .fullscreen-content {
+            width: 90%;
+            height: 90%;
+            position: relative;
+        }
+
+        .fullscreen-content model-viewer {
+            width: 100%;
+            height: 100%;
+        }
+
+        .close-fullscreen {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 107, 53, 0.9);
+            border: none;
+            color: #000;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            z-index: 2001;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #0f0f0f;
+            margin-top: 4rem;
+            color: #666;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-content">
+            <h1>Portfolio 3D</h1>
+            <p class="tagline">Criação de Mundos Virtuais e Experiências Imersivas</p>
+            <div class="social-links">
+                <a href="#" title="ArtStation"><i class="fab fa-artstation"></i></a>
+                <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="mailto:seu-email@exemplo.com" title="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="cta-header">
+                <a href="#contact" class="cta-btn" onclick="showSection('about'); scrollToContact();">Contacta-me</a>
+                <a href="#" class="cta-btn" style="background: #333; color: #e0e0e0;">Download Portfolio PDF</a>
+            </div>
+        </div>
+    </header>
 
-<header>
-<div class="logo">DARKFORM</div>
-<nav>
-<a href="#inicio">Início</a>
-<a href="#portfolio">Portfólio</a>
-<a href="#servicos">Serviços</a>
-<a href="#sobre">Sobre</a>
-<a href="#contacto">Contacto</a>
-</nav>
-</header>
+    <nav>
+        <button class="active" onclick="event.preventDefault(); showSection('models')">Modelos 3D</button>
+        <button onclick="event.preventDefault(); showSection('animations')">Animações</button>
+        <button onclick="event.preventDefault(); showSection('about')">Sobre</button>
+    </nav>
 
-<main>
+    <div class="container">
+        <!-- Secção de Modelos 3D -->
+        <div id="models" class="section active">
+            <div class="upload-section">
+                <h2>Adiciona os teus Modelos 3D</h2>
+                <p class="info-text">Formatos suportados: .glb, .gltf</p>
+                <button class="upload-btn" onclick="openModelModal()">Adicionar Projeto 3D</button>
+            </div>
 
-<!-- HERO -->
-<section class="hero" id="inicio">
+            <div class="filters">
+                <button class="filter-btn active" data-category="all" onclick="filterProjects('all')">Todos</button>
+                <button class="filter-btn" data-category="personagens" onclick="filterProjects('personagens')">Personagens</button>
+                <button class="filter-btn" data-category="ambientes" onclick="filterProjects('ambientes')">Ambientes</button>
+                <button class="filter-btn" data-category="props" onclick="filterProjects('props')">Props</button>
+                <button class="filter-btn" data-category="veiculos" onclick="filterProjects('veiculos')">Veículos</button>
+            </div>
 
-<div>
-<h1>Modelos 3D<br>para apresentação profissional</h1>
-<p>Criação e visualização de modelos 3D realistas para produtos, arquitetura e design industrial, com foco em qualidade visual e experiência do utilizador.</p>
-</div>
+            <div class="loader" id="models-loader"></div>
+            <div class="grid" id="models-grid">
+                <!-- Exemplo de card com modelo 3D -->
+                <div class="card" data-category="personagens">
+                    <button class="fullscreen-btn" onclick="openFullscreen('https://modelviewer.dev/shared-assets/models/Astronaut.glb', 'Astronauta')">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                    <model-viewer 
+                        src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+                        alt="Exemplo de Modelo 3D"
+                        auto-rotate
+                        camera-controls
+                        shadow-intensity="1"
+                        loading="eager">
+                    </model-viewer>
+                    <div class="card-content">
+                        <div class="card-header">
+                            <h3 class="card-title">Astronauta</h3>
+                            <span class="card-date">Jan 2025</span>
+                        </div>
+                        <p class="card-description">Modelo de astronauta criado para demonstração. Texturização PBR completa com roughness e metallic maps. Optimizado para uso em tempo real.</p>
+                        <div class="card-tags">
+                            <span class="tag">Blender</span>
+                            <span class="tag">Substance Painter</span>
+                            <span class="tag">PBR</span>
+                        </div>
+                        <div class="card-specs">
+                            <i class="fas fa-cube"></i> 15k polígonos | <i class="fas fa-image"></i> 2K texturas
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div class="viewer-card">
-<div class="viewer-title">VISUALIZADOR 3D</div>
+        <!-- Secção de Animações -->
+        <div id="animations" class="section">
+            <div class="upload-section">
+                <h2>Adiciona as tuas Animações</h2>
+                <p class="info-text">Formato suportado: .mp4 (recomendado: vídeos comprimidos para melhor performance)</p>
+                <button class="upload-btn" onclick="openVideoModal()">Adicionar Animação</button>
+            </div>
 
-<model-viewer
-src="models/cadeira.glb"
-camera-controls
-shadow-intensity="1"
-exposure="1"
-environment-image="neutral"
-interaction-prompt="none">
-</model-viewer>
+            <div class="filters">
+                <button class="filter-btn active" data-category="all" onclick="filterVideos('all')">Todos</button>
+                <button class="filter-btn" data-category="motion-graphics" onclick="filterVideos('motion-graphics')">Motion Graphics</button>
+                <button class="filter-btn" data-category="character-animation" onclick="filterVideos('character-animation')">Animação de Personagens</button>
+                <button class="filter-btn" data-category="vfx" onclick="filterVideos('vfx')">VFX</button>
+            </div>
 
-<div class="model-info">
-<div><strong>Cadeira Minimal</strong></div>
-<div>GLB • Interativo</div>
-</div>
-</div>
+            <div class="loader" id="videos-loader"></div>
+            <div class="grid" id="animations-grid">
+                <!-- Os vídeos aparecerão aqui -->
+            </div>
+        </div>
 
-</section>
+        <!-- Secção Sobre -->
+        <div id="about" class="section">
+            <div class="about-content">
+                <div class="about-section">
+                    <h3><i class="fas fa-user"></i> Sobre Mim</h3>
+                    <p style="color: #d0d0d0; line-height: 1.8;">
+                        Artista 3D com experiência em modelação, texturização e animação. Apaixonado por criar mundos virtuais imersivos e personagens memoráveis. Com formação em design digital e anos de experiência em produção de conteúdo 3D para várias plataformas.
+                    </p>
+                </div>
 
-<!-- PORTFOLIO -->
-<section id="portfolio">
-<h2>Portfólio</h2>
-<div class="grid">
-<div class="card"><h3>Cadeira Minimal</h3><p>Modelo otimizado para visualização web.</p></div>
-<div class="card"><h3>Mesa Concept</h3><p>Design industrial.</p></div>
-<div class="card"><h3>Luminária</h3><p>Produto para e-commerce.</p></div>
-</div>
-</section>
+                <div class="about-section">
+                    <h3><i class="fas fa-briefcase"></i> Experiência</h3>
+                    <p style="color: #888; margin-bottom: 1rem;"><strong style="color: #ff6b35;">Artista 3D Freelancer</strong> | 2020 - Presente</p>
+                    <p style="color: #d0d0d0; line-height: 1.8; margin-bottom: 1.5rem;">
+                        Criação de assets 3D para games, visualização arquitetónica e motion graphics.
+                    </p>
+                    <p style="color: #888; margin-bottom: 1rem;"><strong style="color: #ff6b35;">Designer 3D</strong> | 2018 - 2020</p>
+                    <p style="color: #d0d0d0; line-height: 1.8;">
+                        Desenvolvimento de modelos para publicidade e conteúdo digital.
+                    </p>
+                </div>
+            </div>
 
-<!-- SERVICES -->
-<section id="servicos">
-<h2>Serviços</h2>
-<div class="services">
-<div class="card"><h3>Modelação 3D</h3><p>Modelos realistas e otimizados.</p></div>
-<div class="card"><h3>Visualização Web</h3><p>Integração interativa em websites.</p></div>
-<div class="card"><h3>Renderização</h3><p>Imagens para catálogos e marketing.</p></div>
-</div>
-</section>
+            <div class="about-section" style="margin-top: 2rem;">
+                <h3><i class="fas fa-tools"></i> Skills e Ferramentas</h3>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <i class="fas fa-cube"></i>
+                        <p style="color: #d0d0d0; margin-top: 0.5rem;">Blender</p>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-palette"></i>
+                        <p style="color: #d0d0d0; margin-top: 0.5rem;">Substance Painter</p>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-film"></i>
+                        <p style="color: #d0d0d0; margin-top: 0.5rem;">After Effects</p>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-vector-square"></i>
+                        <p style="color: #d0d0d0; margin-top: 0.5rem;">Maya</p>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-photo-video"></i>
+                        <p style="color: #d0d0d0; margin-top: 0.5rem;">Cinema 4D</p>
+                    </div>
+                    <div class="skill-item">
+                        <i class="fas fa-gamepad"></i>
+                        <p style="color: #d0d0d0; margin-top: 0.5rem;">Unreal Engine</p>
+                    </div>
+                </div>
+            </div>
 
-<!-- ABOUT -->
-<section id="sobre">
-<h2>Sobre</h2>
-<p>DarkForm Studio é um estúdio especializado em visualização 3D para produtos e experiências digitais modernas.</p>
-</section>
+            <div class="contact-form" id="contact">
+                <h3><i class="fas fa-envelope"></i> Contacta-me</h3>
+                <form onsubmit="handleContactForm(event)">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" id="contact-name" placeholder="O teu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="contact-email" placeholder="teu-email@exemplo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mensagem</label>
+                        <textarea id="contact-message" placeholder="Conta-me sobre o teu projeto..." rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="upload-btn">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-<!-- CONTACT -->
-<section id="contacto">
-<div class="contact-box">
-<h2>Contacto</h2>
-<p>contacto@darkformstudio.com</p>
-<p>Portugal</p>
-</div>
-</section>
+    <!-- Fullscreen overlay para modelos 3D -->
+    <div id="fullscreenOverlay" class="fullscreen-overlay">
+        <button class="close-fullscreen" onclick="closeFullscreen()">
+            <i class="fas fa-times"></i> Fechar
+        </button>
+        <div class="fullscreen-content">
+            <model-viewer id="fullscreenModel" 
+                camera-controls
+                shadow-intensity="1"
+                auto-rotate>
+            </model-viewer>
+        </div>
+    </div>
 
-</main>
+    <!-- Modal para adicionar Modelo 3D -->
+    <div id="modelModal" class="modal">
+        <div class="modal-content">
+            <h3>Adicionar Projeto 3D</h3>
+            <div class="form-group">
+                <label>Ficheiro 3D (.glb ou .gltf)</label>
+                <input type="file" id="model-file" class="modal-input" accept=".glb,.gltf">
+                <button class="upload-btn" onclick="document.getElementById('model-file').click()">Escolher Ficheiro</button>
+                <p class="info-text">Dica: Comprime os teus modelos para melhor performance</p>
+            </div>
+            <div class="form-group">
+                <label>Nome do Projeto</label>
+                <input type="text" id="model-name" placeholder="Ex: Robot Futurista">
+            </div>
+            <div class="form-group">
+                <label>Categoria</label>
+                <select id="model-category">
+                    <option value="personagens">Personagens</option>
+                    <option value="ambientes">Ambientes</option>
+                    <option value="props">Props</option>
+                    <option value="veiculos">Veículos</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea id="model-description" placeholder="Descreve o processo, desafios e técnicas utilizadas..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Software Utilizado (tags)</label>
+                <div class="tag-input-container">
+                    <input type="text" id="model-tag-input" placeholder="Ex: Blender, Maya, Substance...">
+                    <button class="add-tag-btn" onclick="addModelTag()">+</button>
+                </div>
+                <div class="tags-display" id="model-tags-display"></div>
+            </div>
+            <div class="form-group">
+                <label>Especificações Técnicas</label>
+                <input type="text" id="model-specs" placeholder="Ex: 15k polígonos | 2K texturas">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeModelModal()">Cancelar</button>
+                <button class="upload-btn" onclick="saveModel()">Adicionar Projeto</button>
+            </div>
+        </div>
+    </div>
 
-<footer>
-© 2026 DarkForm Studio
-</footer>
-
-</body>
-</html>
+    <!-- Modal para adicionar Vídeo -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <h3>Adicionar Animação</h3>
+            <div class="form-group">
+                <label>Ficheiro de Vídeo (.mp4)</label>
+                <input type="file" id="video-file" class="modal-input" accept=".mp4">
+                <button class="upload-btn" onclick="document.getElementById('video-file').click
